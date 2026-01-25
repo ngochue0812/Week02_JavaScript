@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let dogs = [
+            { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+            { weight: 8, curFood: 200, owners: ['Matilda'] },
+            { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+            { weight: 32, curFood: 340, owners: ['Michael'] },
+            ];
+
+            for (let i = 0; i < dogs.length; i++) {
+            let dog = dogs[i];
+            dog.recommendedFood = Math.floor(dog.weight ** 0.75 * 28);
+            }
+
+            let sarahDog;
+            for (let dog of dogs) {
+            if (dog.owners.includes('Sarah')) {
+                sarahDog = dog;
+                break;
+            }
+            }
+
+            if (sarahDog.curFood > sarahDog.recommendedFood * 1.1) {
+            console.log("Sarah's dog ăn quá nhiều!");
+            } else if (sarahDog.curFood < sarahDog.recommendedFood * 0.9) {
+            console.log("Sarah's dog ăn quá ít!");
+            } else {
+            console.log("Sarah's dog ăn vừa đủ!");
+            }
+
+            let tooMuch = [];
+            let tooLittle = [];
+
+            for (let dog of dogs) {
+            let rec = dog.recommendedFood;
+            let cur = dog.curFood;
+
+            if (cur > rec * 1.1) {
+                tooMuch.push(...dog.owners);
+            } else if (cur < rec * 0.9) {
+                tooLittle.push(...dog.owners);
+            }
+            }
+
+            console.log(tooMuch.join(" và ") + "'s dogs ăn quá nhiều!");
+            console.log(tooLittle.join(" và ") + "'s dogs ăn quá ít!");
+
+            let exact = false;
+            for (let dog of dogs) {
+            if (dog.curFood === dog.recommendedFood) {
+                exact = true;
+                break;
+            }
+            }
+            console.log("Có chó ăn đúng lượng:", exact);
+
+            let okayDogs = [];
+            let hasOkay = false;
+
+            for (let dog of dogs) {
+            let rec = dog.recommendedFood;
+            let cur = dog.curFood;
+            if (cur >= rec * 0.9 && cur <= rec * 1.1) {
+                hasOkay = true;
+                okayDogs.push(dog);
+            }
+            }
+            console.log("Có chó ăn okay:", hasOkay);
+            console.log("Các chó ăn okay:", okayDogs);
+
+            let sortedDogs = dogs.slice(); 
+
+            for (let i = 0; i < sortedDogs.length - 1; i++) {
+            for (let j = i + 1; j < sortedDogs.length; j++) {
+                if (sortedDogs[i].recommendedFood > sortedDogs[j].recommendedFood) {
+                let temp = sortedDogs[i];
+                sortedDogs[i] = sortedDogs[j];
+                sortedDogs[j] = temp;
+                }
+            }
+            }
+            console.log("Danh sách sắp xếp theo lượng thức ăn:", sortedDogs);
+    </script>
+</body>
+</html>

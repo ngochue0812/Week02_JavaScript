@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function calcAverageHumanAge(ages) {
+            let humanAges = ages.map(x => x <= 2 ? x * 2 : 16 + x * 4);
+
+            let adults = humanAges.filter(x => x >= 18);
+
+            if (adults.length === 0) {
+                console.log("Không có chó trưởng thành");
+                return "0.00";
+            }
+
+            let sum = 0;
+            adults.forEach(age => sum += age);
+            
+            let avg = sum / adults.length;
+            return avg.toFixed(2);
+        }
+        console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]));    
+        console.log(calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]));
+    </script>
+</body>
+</html>
